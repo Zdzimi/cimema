@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Zarejestruj się</title>
+  <style>
+    * {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0f0f0f;
+      color: lightseagreen;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #header button {
+      background: none;
+      border: none;
+      color: lightseagreen;
+      text-align: center;
+      padding: 3vh 4vw;
+    }
+
+    #header button:hover {
+      cursor: pointer;
+      background: lightseagreen;
+      color: #0f0f0f;
+    }
+
+    #container form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #container > h2 {
+      margin-bottom: 2vh;
+    }
+
+    #container > h6 {
+      margin-top: 7vh;
+    }
+
+    #container input {
+      background: none;
+      border: none;
+      color: #f9f9f9;
+      padding: 2vh 1vw;
+      margin-top: 1vh;
+      margin-left: 25vw;
+      margin-right: 25vw;
+      border-bottom: lightseagreen dotted 1px;
+    }
+
+    #container input:placeholder-shown {
+      color: lightseagreen;
+    }
+
+    #container input:focus {
+      outline: none;
+      border-bottom: lightseagreen solid 1px;
+    }
+
+    #container button {
+      background: none;
+      border-color: lightseagreen;
+      color: lightseagreen;
+      text-align: center;
+      padding: 2vh 1vw;
+      margin-top: 5vh;
+      margin-left: 35vw;
+      margin-right: 35vw;
+    }
+
+    #container button:hover {
+      cursor: pointer;
+      background: lightseagreen;
+      color: #0f0f0f;
+    }
+
+    #header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 5vh;
+    }
+
+    #footer {
+      padding: 5vh 3vw;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="header">
+
+    <form method="GET" th:action="@{/cinema}">
+      <button type="submit">Kino</button>
+    </form>
+
+    <form method="GET" th:action="@{/cinema/sign-in}">
+      <button type="submit">Logowanie</button>
+    </form>
+
+  </div>
+
+  <div id="container">
+
+    <!--/*@thymesVar id="singingUser" type="com.thjodyt.cinema.data.SingingUser"*/-->
+    <form th:action="@{/cinema/sign-up}" method="post" th:object="${singingUser}">
+      <h2>Zarejestruj się:</h2>
+
+      <input type="text" th:field="*{name}" name="name" placeholder="Imię" required>
+      <h6 th:each="err : ${#fields.errors('name')}" th:text="${err}" class="error"></h6>
+
+      <input type="text" th:field="*{surname}" name="surname" placeholder="Nazwisko" required>
+      <h6 th:each="err : ${#fields.errors('surname')}" th:text="${err}" class="error"></h6>
+
+      <input type="email" th:field="*{email}" name="email" placeholder="e-mail" required>
+      <h6 th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error"></h6>
+
+      <input type="password" th:field="*{password}" name="password" placeholder="Hasło" required>
+      <h6 th:each="err : ${#fields.errors('password')}" th:text="${err}" class="error"></h6>
+
+      <button type="submit">Zarejestruj się</button>
+
+    </form>
+
+  </div>
+
+  <div id="footer">
+    <h3>Projekt zespołowy</h3>
+  </div>
+
+</body>
+</html>
